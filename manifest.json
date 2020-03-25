@@ -1,0 +1,13 @@
+{
+  "name": "Gratis krant",
+  "version": "0.1",
+  "description": "Make sites free to use",
+  "manifest_version": 2,
+  "permissions": ["webRequest", "webRequestBlocking", "browsingData", "tabs",
+					"*://*.demorgen.be/", "*://*.tijd.be/", "*://*.telegraaf.nl/"],
+ 
+  "background": {
+    "scripts": ["background.js"],
+	"persistent": true
+  }
+}

@@ -1,0 +1,9 @@
+detijd:
+	- Remove all cookies, before a request to a html page
+	
+demorgen:
+	- Block request from, www.demorgen.be/temptation/resolve
+
+telegraaf:
+	- add link to head of the page
+	- inject script
