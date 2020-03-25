@@ -54,6 +54,16 @@ chrome.tabs.onUpdated.addListener(
 	}
 );
 
+// Bloomberg
+chrome.webRequest.onBeforeRequest.addListener(
+	function(details) {
+		console.log("Canceling event on bloomberg.com");
+		return {cancel: true};
+	},
+	{urls: ["*://assets.bwbx.io/s3/fence/*"]},
+	["blocking"]
+);
+
 /* some handy dandy functions */
 function removeHeader(headers, name) {
 	for (var i = 0; i < headers.length; i++) {

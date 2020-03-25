@@ -7,3 +7,6 @@ demorgen:
 telegraaf:
 	- add link to head of the page
 	- inject script
+	
+bloomberg:
+	- block request from https://assets.bwbx.io/s3/fence/v4/app.bundle.js

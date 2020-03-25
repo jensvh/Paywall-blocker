@@ -1,10 +1,18 @@
 {
-  "name": "Gratis krant",
+  "name": "Paywall-blocker",
   "version": "0.1",
-  "description": "Make sites free to use",
+  "description": "Remove paywall from newsletters",
+  "icons": {
+	"16": "icons/icon_16.png",
+	"48": "icons/icon_48.png",
+	"128": "icons/icon_128.png"
+  },
   "manifest_version": 2,
   "permissions": ["webRequest", "webRequestBlocking", "browsingData", "tabs",
-					"*://*.demorgen.be/", "*://*.tijd.be/", "*://*.telegraaf.nl/"],
+					"*://*.demorgen.be/",
+					"*://*.tijd.be/",
+					"*://*.telegraaf.nl/",
+					"*://*.bloomberg.com/", "*://*.bwbx.io/*"],
  
   "background": {
     "scripts": ["background.js"],
