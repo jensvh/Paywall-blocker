@@ -1,5 +1,18 @@
+// Cross browser support
+var api = (function() {
+	if (browser) {
+		return browser;
+	} else if (chrome) {
+		return chrome;
+	} else if (msBrowser) {
+		return msBrowser;
+	} else {
+		throw new Error("Unsupported API");
+	}
+})();
+
 // demorgen
-chrome.webRequest.onBeforeRequest.addListener(
+api.webRequest.onBeforeRequest.addListener(
 	function(details) {
 		console.log("Canceling event on demorgen.be");
 		return {cancel: true};
@@ -10,29 +23,30 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 
 // De tijd
-chrome.webRequest.onBeforeSendHeaders.addListener(
+api.webRequest.onBeforeSendHeaders.addListener(
 	function(details) {
 		removeHeader(details.requestHeaders, 'cookie');
 		return {requestHeaders: details.requestHeaders};
 	},
 	{urls: ["*://www.tijd.be/*.html"]},
-	["blocking", "requestHeaders", "extraHeaders"]
+	["blocking", "requestHeaders"]
 );
-chrome.webRequest.onHeadersReceived.addListener(
+api.webRequest.onHeadersReceived.addListener(
 	function(details) {
 		removeHeader(details.responseHeaders, 'set-cookie');
 		return {responseHeaders: details.responseHeaders};
 	},
 	{urls: ["*://www.tijd.be/*.html"]},
-	['blocking', 'responseHeaders', 'extraHeaders']
+	['blocking', 'responseHeaders']
 );
 
 // Telegraaf
-chrome.webRequest.onBeforeRequest.addListener(
+api.webRequest.onBeforeRequest.addListener(
 	function(details) {
-		chrome.browsingData.remove({
+		const var_key = ((browser) ? "hostnames" : "origins"); // Cross browser
+		api.browsingData.remove({
 			"since": 0,
-			"origins": ["https://www.telegraaf.nl"]
+			[var_key]: ["telegraaf.nl"]
 		  }, {
 			"localStorage": true,
 			"pluginData": true,
@@ -45,17 +59,16 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 // Telegraaf: on url change, inject script
-chrome.tabs.onUpdated.addListener(
+api.tabs.onUpdated.addListener(
 	function(tabId, changeInfo, tab) {
 		if (tab.url.match(".*:\\/\\/www\\.telegraaf\\.nl\\/.*")) {
-			console.log(changeInfo);
-			chrome.tabs.executeScript(tabId, {file: "telegraaf_inj.js"});
+			api.tabs.executeScript(tabId, {file: "telegraaf_inj.js"});
 		}
 	}
 );
 
 // Bloomberg
-chrome.webRequest.onBeforeRequest.addListener(
+api.webRequest.onBeforeRequest.addListener(
 	function(details) {
 		console.log("Canceling event on bloomberg.com");
 		return {cancel: true};

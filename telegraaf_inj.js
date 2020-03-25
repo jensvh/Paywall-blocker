@@ -5,8 +5,11 @@ sheet.insertRule('.WebpushOptin__wrapper { display: none!important; }', sheet.cs
 
 // Inject js to reload page, when the background script didn't perform his job
 var code = [
-			'var toCheck = document.getElementById("TEMPRORARY_METERING_ID");', // Reload page, if the backgroundscript didn't his job
-			'if (typeof(toCheck) != "undefined" && toCheck != null){location.reload();}', // reload page
+			'function checkPayWall(){',
+			'	var toCheck = document.getElementById("TEMPRORARY_METERING_ID");',
+			'	if (typeof(toCheck) != "undefined" && toCheck != null){location.reload();}',
+			'}',
+			'window.onload = setTimeout(checkPayWall, 100);'
 			].join('\n');
 var script = document.createElement('script');
 script.textContent = code;

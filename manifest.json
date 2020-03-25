@@ -8,7 +8,11 @@
 	"128": "icons/icon_128.png"
   },
   "manifest_version": 2,
-  "permissions": ["webRequest", "webRequestBlocking", "browsingData", "tabs",
+  "permissions": [
+					"webRequest",
+					"webRequestBlocking",
+					"browsingData", 
+					"tabs",
 					"*://*.demorgen.be/",
 					"*://*.tijd.be/",
 					"*://*.telegraaf.nl/",
