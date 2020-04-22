@@ -77,6 +77,18 @@ api.webRequest.onBeforeRequest.addListener(
 	["blocking"]
 );
 
+// Knack yea, joris is geen maagd
+api.webRequest.onBeforeRequest.addListener(
+	function(details) {
+		console.log("Canceling event on linkse ratten knack.be");
+		return {cancel: true};
+	},
+	{urls: ["*://www.demorgen.be/temptation/resolve*"]},
+	["blocking"]
+
+	// nog niet af er is na de ad blocker ook nog een pay wall....
+);
+
 /* some handy dandy functions */
 function removeHeader(headers, name) {
 	for (var i = 0; i < headers.length; i++) {
