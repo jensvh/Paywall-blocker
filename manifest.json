@@ -16,7 +16,9 @@
 					"*://*.demorgen.be/",
 					"*://*.tijd.be/", "*://*.twipecloud.net/*",
 					"*://*.telegraaf.nl/",
-					"*://*.bloomberg.com/", "*://*.bwbx.io/*"],
+					"*://*.bloomberg.com/", "*://*.bwbx.io/*",
+					"*://*.knack.be/"],
+ 
   "background": {
     "scripts": ["background.js"],
 	"persistent": true
