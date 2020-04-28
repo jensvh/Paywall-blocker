@@ -14,12 +14,12 @@
 					"browsingData", 
 					"tabs",
 					"*://*.demorgen.be/",
-					"*://*.tijd.be/",
+					"*://*.tijd.be/", "*://*.twipecloud.net/*",
 					"*://*.telegraaf.nl/",
 					"*://*.bloomberg.com/", "*://*.bwbx.io/*"],
- 
   "background": {
     "scripts": ["background.js"],
 	"persistent": true
-  }
+  },
+  "web_accessible_resources": ["de_tijd_krant_inj.js"]
 }

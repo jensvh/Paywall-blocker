@@ -1,10 +1,10 @@
 // Cross browser support
 var api = (function() {
-	if (browser) {
+	if (typeof browser !== 'undefined') {
 		return browser;
-	} else if (chrome) {
+	} else if (typeof chrome !== 'undefined') {
 		return chrome;
-	} else if (msBrowser) {
+	} else if (typeof msBrowser !== 'undefined') {
 		return msBrowser;
 	} else {
 		throw new Error("Unsupported API");
@@ -38,6 +38,23 @@ api.webRequest.onHeadersReceived.addListener(
 	},
 	{urls: ["*://www.tijd.be/*.html"]},
 	['blocking', 'responseHeaders']
+);
+
+// De tijd krant
+api.webRequest.onBeforeRequest.addListener(
+	function(details) {
+		console.log("Canceling event on tijd.be");
+		return {cancel: true};
+	},
+	{urls: ["*://webreaders.twipecloud.net/webapp/mfn-tij/primary/1.0.0.21/partial/web.js"]},
+	["blocking"]
+);
+api.tabs.onUpdated.addListener(
+	function(tabId, changeInfo, tab) {
+		if (tab.url.match(".*:\\/\\/krant\\.tijd\\.be\\/.*")) {
+			api.tabs.executeScript(tabId, {file: "de_tijd_krant_injector.js"});
+		}
+	}
 );
 
 // Telegraaf
