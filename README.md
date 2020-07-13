@@ -8,3 +8,4 @@ Supported sites
  * [De Telegraaf](https://www.telegraaf.nl/)
  * [bloomberg](https://www.bloomberg.com/)
  * [Knack](https://www.knack.be/)
+ * [GVA] (https://gva.be/)

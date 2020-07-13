@@ -12,5 +12,8 @@ bloomberg:
 	- block request from https://assets.bwbx.io/s3/fence/v4/app.bundle.js
 
 Knack
-	- Block the ad-blocker.xhr in www.knack.be/embed/render/popup/ad-blocker
-	- nog niet af er is na de ad blocker ook nog een pay wall....
+	- addblocker pop-up
+	- blury overlay (image, shadow)
+	- show full article
+GVA:
+	- Read json from script, convert to html

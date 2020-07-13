@@ -28,7 +28,7 @@ api.webRequest.onBeforeSendHeaders.addListener(
 		removeHeader(details.requestHeaders, 'cookie');
 		return {requestHeaders: details.requestHeaders};
 	},
-	{urls: ["*://www.tijd.be/*.html"]},
+	{urls: ["*://www.tijd.be/*"]},
 	["blocking", "requestHeaders"]
 );
 api.webRequest.onHeadersReceived.addListener(
@@ -36,7 +36,7 @@ api.webRequest.onHeadersReceived.addListener(
 		removeHeader(details.responseHeaders, 'set-cookie');
 		return {responseHeaders: details.responseHeaders};
 	},
-	{urls: ["*://www.tijd.be/*.html"]},
+	{urls: ["*://www.tijd.be/*"]},
 	['blocking', 'responseHeaders']
 );
 
@@ -95,15 +95,21 @@ api.webRequest.onBeforeRequest.addListener(
 );
 
 // Knack yea, joris is geen maagd
-api.webRequest.onBeforeRequest.addListener(
-	function(details) {
-		console.log("Canceling event on linkse ratten knack.be");
-		return {cancel: true};
-	},
-	{urls: ["*://www.demorgen.be/temptation/resolve*"]},
-	["blocking"]
+api.tabs.onUpdated.addListener(
+	function(tabId, changeInfo, tab) {
+		if (tab.url.match(".*:\\/\\/www\\.knack\\.be\\/.*")) {
+			api.tabs.executeScript(tabId, {file: "knack_injector.js", runAt: "document_start"});
+		}
+	}
+);
 
-	// nog niet af er is na de ad blocker ook nog een pay wall....
+// GVA
+api.tabs.onUpdated.addListener(
+	function(tabId, changeInfo, tab) {
+		if (tab.url.match(".*:\\/\\/www\\.gva\\.be\\/cnt\\/.*")) {
+			api.tabs.executeScript(tabId, {file: "gva_injector.js", runAt: "document_start"});
+		}
+	}
 );
 
 /* some handy dandy functions */
