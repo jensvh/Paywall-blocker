@@ -1,17 +1,29 @@
+function removePopups() {
+	var sheet = document.createElement("style");
+	window.document.head.appendChild(sheet);
+	sheet.sheet.insertRule('.PopupBackdrop__block {display: none!important; }');
+	sheet.sheet.insertRule('.TextArticlePage__bodyText { white-space: pre-line; }');
+}
 
-// Add css in page, to hide the popup
-var sheet = window.document.styleSheets[0];
-sheet.insertRule('.WebpushOptin__wrapper { display: none!important; }', sheet.cssRules.length);
+function showFullArticle() {
+	var jsonScript = document.querySelector('[type="application/ld+json"][data-react-helmet="true"]');
+	if (jsonScript == undefined || jsonScript == null) {
+		return; // Probably it is a free article
+	}
+	var json = JSON.parse(jsonScript.textContent);
+	var articleBody = json['articleBody'];
+	// Create showable linebreaks
+	const niceBody = articleBody.split("\\n\\n").join("\r\n");
+	
+	var articleElmt = document.querySelector('[class="TextArticlePage__bodyText"][data-element="articleBody"]');
+	articleElmt.textContent = niceBody;
+}
 
-// Inject js to reload page, when the background script didn't perform his job
-var code = [
-			'function checkPayWall(){',
-			'	var toCheck = document.getElementById("TEMPRORARY_METERING_ID");',
-			'	if (typeof(toCheck) != "undefined" && toCheck != null){location.reload();}',
-			'}',
-			'window.onload = setTimeout(checkPayWall, 100);'
-			].join('\n');
-var script = document.createElement('script');
-script.textContent = code;
-(document.head||document.documentElement).appendChild(script);
-script.remove();
+removePopups();
+showFullArticle();
+
+
+/*
+Test gva, removed line with id
+
+ */

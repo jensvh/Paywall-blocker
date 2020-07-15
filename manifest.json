@@ -1,6 +1,6 @@
 {
   "name": "Paywall-blocker",
-  "version": "0.4",
+  "version": "0.6",
   "description": "Remove paywall from newsletters",
   "icons": {
 	"16": "icons/icon_16.png",
@@ -13,16 +13,16 @@
 					"webRequestBlocking",
 					"browsingData", 
 					"tabs",
-					"*://*.demorgen.be/",
-					"*://*.tijd.be/", "*://*.twipecloud.net/*",
-					"*://*.telegraaf.nl/",
-					"*://*.bloomberg.com/", "*://*.bwbx.io/*",
-					"*://*.knack.be/",
-					"*://*.gva.be/"],
+					"*://*.demorgen.be/*",
+					"*://*.tijd.be/*", "*://*.twipecloud.net/*",
+					"*://*.telegraaf.nl/*",
+					"*://*.bloomberg.com/*", "*://*.bwbx.io/*",
+					"*://*.knack.be/*",
+					"*://*.gva.be/*"],
  
   "background": {
     "scripts": ["background.js"],
 	"persistent": true
   },
-  "web_accessible_resources": ["de_tijd_krant_inj.js", "gva_inject_code.js", "knack_inject_code.js"]
+  "web_accessible_resources": ["gva_inject_code.js", "knack_inject_code.js"]
 }

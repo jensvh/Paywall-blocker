@@ -5,8 +5,7 @@ demorgen:
 	- Block request from, www.demorgen.be/temptation/resolve
 
 telegraaf:
-	- add link to head of the page
-	- inject script
+	- read from json, convert to html
 	
 bloomberg:
 	- block request from https://assets.bwbx.io/s3/fence/v4/app.bundle.js
