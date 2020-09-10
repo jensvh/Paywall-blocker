@@ -1,7 +1,7 @@
 {
   "name": "Paywall-blocker",
-  "version": "0.6",
-  "version_name": "0.6-SNAPSHOT",
+  "version": "0.7",
+  "version_name": "0.7-SNAPSHOT",
   "description": "Remove paywall from newsletters",
   "icons": {
 	"16": "icons/icon_16.png",
