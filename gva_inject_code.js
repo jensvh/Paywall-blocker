@@ -6,6 +6,7 @@ function removeOverlay() {
 	sheet.sheet.insertRule('.is-dialog-active { overflow: auto!important; }');
 	sheet.sheet.insertRule('.bold { font-weight: bold; }');
 	sheet.sheet.insertRule('.italic { font-style: italic; }');
+	sheet.sheet.insertRule('body { overflow: scroll!important;}');
 }
 
 // Show full article
