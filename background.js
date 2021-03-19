@@ -77,10 +77,19 @@ api.tabs.onUpdated.addListener(
 	function(tabId, changeInfo, tab) {
 		if (tab.url !== undefined && changeInfo.status == "complete") {
 			if (tab.url.match(".*:\\/\\/www\\.gva\\.be\\/cnt\\/.*")) {
-				api.tabs.executeScript(tabId, {file: "gva_inject_code.js", runAt: "document_end"});
+				api.tabs.executeScript(tabId, {file: "gva_injector.js", runAt: "document_end"});
 			}
 		}
 	}
+);
+
+api.webRequest.onBeforeRequest.addListener(
+	function(details) {
+		console.log("Canceling event on gva.be");
+		return {cancel: true};
+	},
+	{urls: ["*://fragments.1platform.be/v2/article-detail/cdn/*.js", "*://markup.gva.be/extra/assets/customer-journey/cj-react-flows.umd.js*"]},
+	["blocking"]
 );
 
 /* some handy dandy functions */

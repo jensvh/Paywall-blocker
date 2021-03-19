@@ -15,4 +15,7 @@ Knack
 	- blury overlay (image, shadow)
 	- show full article
 GVA:
-	- Read json from script, convert to html
+	- Block paywall: markup.gva.be/extra/assets/customer-journey/cj-react-flows.umd.js*
+	- Show full article:
+		- Inject piece of code
+		- block: fragments.1platform.be/v2/article-detail/cdn/fragment-article-detail.0.0.200.gva.bundle.js
