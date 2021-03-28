@@ -11,16 +11,13 @@ var api = (function() {
 	}
 })();
 
-// demorgen
-api.webRequest.onBeforeRequest.addListener(
-	function(details) {
-		console.log("Canceling event on demorgen.be");
-		return {cancel: true};
-	},
-	{urls: ["*://www.demorgen.be/temptation/resolve*"]},
-	["blocking"]
-);
-
+var urls_to_block = [
+	"*://www.demorgen.be/temptation/resolve*",									// DeMorgen
+	"*://assets.bwbx.io/s3/fence/*",											// Bloomberg
+	"*://fragments.1platform.be/v2/article-detail/cdn/*.js",					// GVA
+	"*://markup.gva.be/extra/assets/customer-journey/cj-react-flows.umd.js*",	// GVA
+	"*://www.telegraaf.nl/cdn/statics/TextArticlePage.*.js"						// Telegraaf
+];
 
 // De tijd
 api.webRequest.onBeforeSendHeaders.addListener(
@@ -29,66 +26,15 @@ api.webRequest.onBeforeSendHeaders.addListener(
 		return {requestHeaders: details.requestHeaders};
 	},
 	{urls: ["*://www.tijd.be/*"]},
-	["blocking", "requestHeaders"]
-);
-api.webRequest.onHeadersReceived.addListener(
-	function(details) {
-		removeHeader(details.responseHeaders, 'set-cookie');
-		return {responseHeaders: details.responseHeaders};
-	},
-	{urls: ["*://www.tijd.be/*"]},
-	['blocking', 'responseHeaders']
+	["blocking", "requestHeaders"] // "extraHeaders" for chrome support.
 );
 
-// Telegraaf: on url change, inject script
-api.tabs.onUpdated.addListener(
-	function(tabId, changeInfo, tab) {
-		if (tab.url !== undefined && changeInfo.status == "complete") {
-			if (tab.url.match(".*:\\/\\/www\\.telegraaf\\.nl\\/.*")) {
-				api.tabs.executeScript(tabId, {file: "telegraaf_inj.js", runAt: "document_end"});
-			}
-		}
-	}
-);
-
-// Bloomberg
+// Block urls
 api.webRequest.onBeforeRequest.addListener(
 	function(details) {
-		console.log("Canceling event on bloomberg.com");
 		return {cancel: true};
 	},
-	{urls: ["*://assets.bwbx.io/s3/fence/*"]},
-	["blocking"]
-);
-
-// Knack yea
-api.tabs.onUpdated.addListener(
-	function(tabId, changeInfo, tab) {
-		if (tab.url !== undefined && changeInfo.status == "complete") { // Only when url has changed
-			if (tab.url.match(".*:\\/\\/www\\.knack\\.be\\/.*")) {
-				api.tabs.executeScript(tabId, {file: "knack_inject_code.js", runAt: "document_end"});
-			}
-		}
-	}
-);
-
-// GVA
-api.tabs.onUpdated.addListener(
-	function(tabId, changeInfo, tab) {
-		if (tab.url !== undefined && changeInfo.status == "complete") {
-			if (tab.url.match(".*:\\/\\/www\\.gva\\.be\\/cnt\\/.*")) {
-				api.tabs.executeScript(tabId, {file: "gva_injector.js", runAt: "document_end"});
-			}
-		}
-	}
-);
-
-api.webRequest.onBeforeRequest.addListener(
-	function(details) {
-		console.log("Canceling event on gva.be");
-		return {cancel: true};
-	},
-	{urls: ["*://fragments.1platform.be/v2/article-detail/cdn/*.js", "*://markup.gva.be/extra/assets/customer-journey/cj-react-flows.umd.js*"]},
+	{urls: urls_to_block},
 	["blocking"]
 );
 
