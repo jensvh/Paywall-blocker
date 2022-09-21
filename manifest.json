@@ -33,5 +33,5 @@
 	"js": ["knack_inject_code.js"],
   	"run_at": "document_end"
   }],
-  "web_accessible_resources": ["gva_injector.js", "ObfCode/gva_injection_code.js", "knack_inject_code.js", "ObfCode/telegraaf_inj.js", "telegraaf_injector.js", "gva_custom.js"]
+  "web_accessible_resources": ["gva_injector.js", "gva_custom.js", "knack_inject_code.js", "telegraaf_injector.js"]
 }
