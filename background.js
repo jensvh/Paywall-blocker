@@ -22,10 +22,17 @@ var urls_to_block = [
 // De tijd
 api.webRequest.onBeforeSendHeaders.addListener(
 	function(details) {
-		removeHeader(details.requestHeaders, 'cookie');
+		removeHeader(details.requestHeaders, "cookie");
+		for (var header of details.requestHeaders) {
+			if (header.name === "Referer") {
+				header.value = "https://www.google.com/";
+				return {requestHeaders: details.requestHeaders};
+			}
+		}
+		details.requestHeaders.push({name: "referer", value: "https://www.google.com/"})
 		return {requestHeaders: details.requestHeaders};
 	},
-	{urls: ["*://www.tijd.be/*"]},
+	{urls: ["https://www.tijd.be/*"]},
 	["blocking", "requestHeaders"] // "extraHeaders" for chrome support.
 );
 

@@ -1,13 +1,8 @@
 {
   "name": "Paywall-blocker",
-  "version": "0.9",
-  "version_name": "0.9",
+  "version": "1.0",
+  "version_name": "1.0",
   "description": "Remove paywall from newsletters",
-  "icons": {
-	"16": "icons/icon_16.png",
-	"48": "icons/icon_48.png",
-	"128": "icons/icon_128.png"
-  },
   "manifest_version": 2,
   "permissions": [
 					"webRequest",
@@ -38,5 +33,5 @@
 	"js": ["knack_inject_code.js"],
   	"run_at": "document_end"
   }],
-  "web_accessible_resources": ["gva_injector.js", "gva_injection_code.js", "knack_inject_code.js", "telegraaf_inj.js", "telegraaf_injector.js"]
+  "web_accessible_resources": ["gva_injector.js", "ObfCode/gva_injection_code.js", "knack_inject_code.js", "ObfCode/telegraaf_inj.js", "telegraaf_injector.js", "gva_custom.js"]
 }

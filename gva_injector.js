@@ -1,6 +1,5 @@
 var s = document.createElement('script');
-// TODO: add "script.js" to web_accessible_resources in manifest.json
-s.src = "https://cdn.jsdelivr.net/gh/jensvh/paywall-blocker@master/obfcode/gva_injection_code.js";
+s.src = chrome.runtime.getURL('gva_custom.js');
 s.onload = function() {
     this.remove();
 };
