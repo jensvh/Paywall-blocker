@@ -36,6 +36,16 @@ api.webRequest.onBeforeSendHeaders.addListener(
 	["blocking", "requestHeaders"] // "extraHeaders" for chrome support.
 );
 
+// Medium
+api.webRequest.onBeforeSendHeaders.addListener(
+	function(details) {
+		removeHeader(details.requestHeaders, "cookie");
+		return {requestHeaders: details.requestHeaders};
+	},
+	{urls: ["https://medium.com/*", "https://*.medium.com/*"]},
+	["blocking", "requestHeaders"] // "extraHeaders" for chrome support.
+);
+
 // Block urls
 api.webRequest.onBeforeRequest.addListener(
 	function(details) {

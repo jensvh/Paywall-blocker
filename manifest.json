@@ -14,7 +14,8 @@
 					"*://*.telegraaf.nl/*",
 					"*://*.bloomberg.com/*", "*://*.bwbx.io/*",
 					"*://*.knack.be/*",
-					"*://*.gva.be/*", "*://*.1platform.be/*"],
+					"*://*.gva.be/*", "*://*.1platform.be/*",
+					"*://*.medium.com/*"],
  
   "background": {
     "scripts": ["background.js"],
