@@ -1,7 +1,7 @@
 {
   "name": "Paywall-blocker",
-  "version": "1.0",
-  "version_name": "1.0",
+  "version": "1.2",
+  "version_name": "1.2",
   "description": "Remove paywall from newsletters",
   "manifest_version": 2,
   "permissions": [
