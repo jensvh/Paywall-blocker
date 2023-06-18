@@ -1,0 +1,65 @@
+[
+  {
+    "_site": "telegraaf",
+	"id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {"urlFilter": "*://www.telegraaf.nl/cdn/statics/TextArticlePage.*.js", "resourceTypes": ["script"] }
+  },
+  {
+    "_site": "GVA",
+	"id": 2,
+    "priority": 1,
+    "action": { "type": "allow" },
+    "condition": { "urlFilter": "*://markup.gva.be/extra/assets/customer-journey/cj-react-flows.umd.js*", "resourceTypes": ["script"] }
+  },
+  {
+    "_site": "GVA",
+	"id": 3,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "*://fragments.1platform.be/v2/article-detail/cdn/*.js", "resourceTypes": ["script"] }
+  },
+  {
+    "_site": "Bloomberg",
+	"id": 4,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "*://assets.bwbx.io/s3/fence/*", "resourceTypes": ["script"] }
+  },
+  {
+    "_site": "DeMorgen",
+	"id": 5,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "*://www.demorgen.be/temptation/resolve*", "resourceTypes": ["xmlhttprequest"] }
+  },
+  {
+	"_site": "DeTijd",
+    "id": 6,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+	  "requestHeaders": [
+        { "header": "referer", "operation": "set", "value": "https://www.google.com/" },
+        { "header": "Referer", "operation": "set", "value": "https://www.google.com/" },
+        { "header": "Cookie", "operation": "set", "value": "" }
+      ]
+      
+    },
+    "condition": { "urlFilter": "*://www.tijd.be/*", "resourceTypes": ["main_frame"] }
+  },
+  {
+	"_site": "Medium",
+    "id": 7,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+	  "requestHeaders": [
+        { "header": "Cookie", "operation": "set", "value": "" }
+      ]
+      
+    },
+    "condition": { "urlFilter": "*medium.com/*", "resourceTypes": ["main_frame"] }
+  }
+]
