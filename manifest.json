@@ -3,36 +3,78 @@
   "version": "1.2",
   "version_name": "1.2",
   "description": "Remove paywall from newsletters",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "permissions": [
-					"webRequest",
-					"webRequestBlocking",
-					"browsingData", 
-					"tabs",
-					"*://*.demorgen.be/*",
-					"*://*.tijd.be/*", "*://*.twipecloud.net/*",
-					"*://*.telegraaf.nl/*",
-					"*://*.bloomberg.com/*", "*://*.bwbx.io/*",
-					"*://*.knack.be/*",
-					"*://*.gva.be/*", "*://*.1platform.be/*",
-					"*://*.medium.com/*"],
- 
+    "webRequest",
+	"declarativeNetRequest", // For request blocking
+    "browsingData",
+    "tabs"
+  ],
   "background": {
-    "scripts": ["background.js"],
-	"persistent": true
+    "service_worker": "service_worker.js"
   },
-  "content_scripts": [{
-	"matches": ["*://*.telegraaf.nl/*"],
-	"js": ["telegraaf_injector.js"],
-  	"run_at": "document_start"
-  },{
-	"matches": ["*://www.gva.be/cnt/*"],
-	"js": ["gva_injector.js"],
-  	"run_at": "document_end"
-  },{
-	"matches": ["*://www.knack.be/*"],
-	"js": ["knack_inject_code.js"],
-  	"run_at": "document_end"
-  }],
-  "web_accessible_resources": ["gva_injector.js", "gva_custom.js", "knack_inject_code.js", "telegraaf_injector.js"]
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.telegraaf.nl/*"
+      ],
+      "js": [
+        "telegraaf_injector.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.gva.be/cnt/*"
+      ],
+      "js": [
+        "gva_injector.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.knack.be/*"
+      ],
+      "js": [
+        "knack_inject_code.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [ // TODO
+    {
+      "resources": [
+        "gva_injector.js",
+        "gva_custom.js",
+        "knack_inject_code.js",
+        "telegraaf_injector.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_security_policy": {},
+  "host_permissions": [
+    "*://*.demorgen.be/*",
+    "*://*.tijd.be/*",
+    "*://*.twipecloud.net/*",
+    "*://*.telegraaf.nl/*",
+    "*://*.bloomberg.com/*",
+    "*://*.bwbx.io/*",
+    "*://*.knack.be/*",
+    "*://*.gva.be/*",
+    "*://*.1platform.be/*",
+    "*://*.medium.com/*"
+  ],
+  
+  // Blocking requests
+  "declarative_net_request" : {
+    "rule_resources" : [{
+      "id": "requests_to_block_1",
+      "enabled": true,
+      "path": "request_to_block.json"
+    }]
+  },
 }
